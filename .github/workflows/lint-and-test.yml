@@ -55,22 +55,6 @@ jobs:
       matrix:
         PYTHON_VERSION: ['3.11']
 
-    services:
-      s3mock:
-        image: adobe/s3mock:3.1.0
-        env:
-          initialBuckets: data_lake
-        ports:
-          - 9090:9090
-
-    env:
-      AIRFLOW_CONN_DATA_LAKE_TEST: '{"conn_type": "aws", "extra": {"endpoint_url": "http://localhost:9090"}}'
-      AWS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
-      AWS_SECRET_ACCESS_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-      AWS_DEFAULT_REGION: us-east-1
-      TEST_BUCKET: data_lake
-      S3_ENDPOINT_URL: http://localhost:9090
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
